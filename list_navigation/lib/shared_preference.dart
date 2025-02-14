@@ -21,13 +21,11 @@ class _SharedPreferenceDemoState extends State<SharedPreferenceDemo> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     // 싱글톤 패턴을 사용해야만 하는 경우에 해당.
 
+    // setState를 호출하여 화면을 다시 그린다.
     setState(() {
-      // setState를 호출하여 화면을 다시 그린다.
-      setState(() {
-        _controller.text = prefs.getString('username') ?? '';
-      });
-      // SharedPreferences에서 사용자 이름을 가져와 텍스트필드에 표시한다.
+      _controller.text = prefs.getString('username') ?? '';
     });
+    // SharedPreferences에서 사용자 이름을 가져와 텍스트필드에 표시한다.
   }
 
   @override
