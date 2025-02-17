@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 
 // import 'sliverlistview.dart';
 // import 'textfield.dart';
-import 'shared_preference.dart';
+// import 'shared_preference.dart';
+// import 'navigator.dart';
+// import 'drawer.dart';
+import 'tab.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,15 +20,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        // title: 'Flutter Demo',
-        // theme: ThemeData(
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        // useMaterial3: true,
-        // primaryColor: Colors.blue,
-        // ),
-        // home: const MyListView(),
-        // home: const MySliverList(),
-        // home: const TextFieldDemo(),
-        home: SharedPreferenceDemo());
+      title: 'Flutter Demo',
+      theme: ThemeData(
+          // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+
+          // themeData의 tabBarTheme 속성을 사용해 탭바의 색상을 변경
+          tabBarTheme: const TabBarTheme(
+            labelColor: Colors.green,
+            indicatorColor: Colors.green,
+          )
+          // primaryColor: Colors.blue,
+          ),
+      // home: const MyListView(),
+      // home: const MySliverList(),
+      // home: const TextFieldDemo(),
+      // home: SharedPreferenceDemo(),
+      // home: NavigatorDemo(),
+      // home: DrawerDemo(),
+      home: TabDemo(),
+    );
   }
 }
