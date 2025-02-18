@@ -27,6 +27,8 @@ class _MyWidgetState extends State<MyWidget> {
   void initState() {
     super.initState();
     debugPrint('initState');
+
+    // _loadData 함수 호출 but _loadData 함수는 비동기 함수다.
     // 일반함수에서 비동기 함수를 호출할 때는 then을 사용
     _loadData().then((value) {
       // then 함수는 비동기 함수가 완료되면 실행됩니다.
