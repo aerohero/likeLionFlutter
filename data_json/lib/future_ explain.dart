@@ -43,6 +43,7 @@ class _MyWidgetState extends State<MyWidget> {
   }
 
   Future<String> _loadData() async {
+    // 비동기 함수를 선언할 때는 async 키워드를 사용한다.
     debugPrint('_loadData');
     await Future.delayed(Duration(seconds: 5));
     debugPrint('setState');
