@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:provider_demo/even_odd_display.dart';
 
 import 'counter_model.dart';
+import 'theme_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,14 +14,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => CounterModel(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        ),
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => CounterModel()),
+        ChangeNotifierProvider(create: (context) => ThemeModel()),
+      ],
+      child: Consumer<ThemeModel>(
+        builder: (context, themeModel, _) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme:
+                themeModel.isLightTheme ? ThemeData.light() : ThemeData.dark(),
+            home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          );
+        },
       ),
     );
   }
@@ -34,6 +41,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final counterModel = Provider.of<CounterModel>(context, listen: false);
+    final themeModel = Provider.of<ThemeModel>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -69,6 +77,7 @@ class MyHomePage extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     counterModel.increment();
+                    themeModel.toggleTheme();
                   },
                   child: const Text('증가'),
                 ),
