@@ -4,6 +4,7 @@ import '../models/product.dart';
 import '../services/api_service.dart';
 import '../widgets/product_card.dart';
 import '../widgets/shopping_cart.dart';
+import '../widgets/theme_button.dart';
 
 class ProductListScreen extends StatefulWidget {
   const ProductListScreen({super.key});
@@ -25,7 +26,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('상품 목록'), actions: [ShoppingCart()]),
+      appBar: AppBar(
+        title: const Text('상품 목록'),
+        actions: [ThemeButton(), ShoppingCart()],
+      ),
       body: Column(
         children: [
           Padding(

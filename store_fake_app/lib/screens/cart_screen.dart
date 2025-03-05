@@ -1,10 +1,11 @@
+import 'checkout_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:store_fake_app/providers/cart_provider.dart';
 
 // import '../models/product.dart';
 import '../models/cart_item.dart';
-// import '../providers/cart_provider.dart';
+import '../providers/cart_provider.dart';
 import '../widgets/cart_item_widget.dart';
 
 class CartScreen extends StatelessWidget {
@@ -56,6 +57,11 @@ class CartScreen extends StatelessWidget {
                       ),
                       onPressed: () {
                         // 결제하기
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const CheckoutScreen(),
+                          ),
+                        );
                       },
                       child: Text(
                         '결제하기 - \$${cart.totalPrice.toStringAsFixed(2)}',
