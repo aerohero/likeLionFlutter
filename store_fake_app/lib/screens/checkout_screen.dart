@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/cart_item.dart';
+import '../providers/order_provider.dart';
 import '../providers/cart_provider.dart';
 import '../services/payment_service.dart';
-import '../providers/order_provider.dart';
 import 'order_confirmation_screen.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -32,58 +32,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     return Scaffold(
       appBar: AppBar(title: Text('결제하기')),
       body: SafeArea(
-        child: Column(
-          children: [
-            // 결제 상품 목록
-            Expanded(
-              child: ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  final cartItem = items[index];
-                  return ListTile(
-                    title: Text(
-                      '${cartItem.product.title} x ${cartItem.quantity}',
-                    ),
-                    subtitle: Text(
-                      '\$${cartItem.totalPrice.toStringAsFixed(2)}',
-                    ),
-                  );
-                },
-              ),
-            ),
-            // 합산 금액
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                '총 결제 금액: \$${items.fold(0.0, (total, current) => total + current.totalPrice).toStringAsFixed(2)}',
-                style: const TextStyle(fontSize: 20),
-              ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                ),
-                onPressed: () {
-                  final cartProvider = Provider.of<CartProvider>(
-                    context,
-                    listen: false,
-                  );
-                  final double totalAmount = cartProvider.totalPrice;
-
-                  // 결제 완료 후 장바구니 비우기
-                  _processPayment(totalAmount, cartProvider.items);
-                },
-                child: const Text(
-                  '결제하기',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ],body: SafeArea(
         child: Column(
           children: [
             // 결제 상품 목록
